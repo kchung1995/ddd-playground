@@ -13,11 +13,11 @@ data class Order(
 
     val orderAmountSum: BigDecimal = products.sumOf { it.orderAmountSum }
 
-    fun changeOrderState(orderState: OrderState): Order {
+    private fun changeOrderState(newOrderState: OrderState): Order {
         return Order(
             this.products,
             this.shippingInfo,
-            orderState
+            newOrderState
         )
     }
 
@@ -55,8 +55,8 @@ data class ShippingInfo(
 )
 
 data class Address(
-    val addressLine01: String,
-    val addressLine02: String,
+    val line01: String,
+    val line02: String,
     val addressExtra: String? = null,
     val postalCode: String
 )
