@@ -8,10 +8,10 @@ data class Order(
     val orderState: OrderState
 ) {
     init {
-        validate()
+        require(products.size > 1) { "A new order should contain at least one product." }
     }
 
-    val orderAmountSum: BigDecimal = products.sumOf {it.orderAmountSum }
+    val orderAmountSum: BigDecimal = products.sumOf { it.orderAmountSum }
 
     fun changeOrderState(orderState: OrderState): Order {
         return Order(
@@ -22,6 +22,7 @@ data class Order(
     }
 
     fun changeShippingInfo(shippingInfo: ShippingInfo): Order {
+        require(this.orderState.isShipping().not()) { "Cannot change shipping address if already started shipping." }
         return Order(
             this.products,
             shippingInfo,
@@ -29,10 +30,9 @@ data class Order(
         )
     }
 
-    fun cancel(): Order = changeOrderState(OrderState.CANCELLED)
-
-    fun validate() {
-        require(products.size > 1) { "A new order should contain at least one product." }
+    fun cancel(): Order {
+        require(this.orderState.isCancellable()) { "An order cannot be cancelled if already started shipping." }
+        return changeOrderState(OrderState.CANCELLED)
     }
 }
 
@@ -71,4 +71,6 @@ enum class OrderState {
     fun isCancellable() = this == BEFORE_PAY || this == PAID
 
     fun isPreparable() = this == PAID || this == SHIPPING || this == SHIPPED
+
+    fun isShipping() = this == SHIPPING || this == SHIPPED
 }
