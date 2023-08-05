@@ -62,15 +62,14 @@ data class Address(
 )
 
 enum class OrderState {
-    BEFORE_PAY,
-    PAID,
-    SHIPPING,
+    PAYMENT_WAITING,
+    PREPARING,
     SHIPPED,
+    DELIVERING,
+    DELIVERY_COMPLETED,
     CANCELLED;
 
-    fun isCancellable() = this == BEFORE_PAY || this == PAID
+    fun isCancellable() = this == PAYMENT_WAITING || this == PREPARING
 
-    fun isPreparable() = this == PAID || this == SHIPPING || this == SHIPPED
-
-    fun isShipping() = this == SHIPPING || this == SHIPPED
+    fun isShipping() = this == SHIPPED || this == DELIVERING || this == DELIVERY_COMPLETED
 }

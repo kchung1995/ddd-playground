@@ -16,7 +16,7 @@ internal class OrderTest {
         // given
         val products = emptyList<OrderProduct>()
         val shippingInfo = shippingInfo
-        val orderState = OrderState.BEFORE_PAY
+        val orderState = OrderState.PAYMENT_WAITING
 
         // when
 
@@ -29,7 +29,7 @@ internal class OrderTest {
         // given
         val products = listOf(ORDER_PRODUCT_01, ORDER_PRODUCT_02, ORDER_PRODUCT_03)
         val shippingInfo = shippingInfo
-        val orderState = OrderState.SHIPPING
+        val orderState = OrderState.DELIVERING
 
         val order = Order(products, shippingInfo, orderState)
 
@@ -45,7 +45,7 @@ internal class OrderTest {
         // given
         val products = listOf(ORDER_PRODUCT_01, ORDER_PRODUCT_02, ORDER_PRODUCT_03)
         val shippingInfo = shippingInfo
-        val orderState = OrderState.BEFORE_PAY
+        val orderState = OrderState.PAYMENT_WAITING
 
         val order = Order(products, shippingInfo, orderState)
 
@@ -62,7 +62,7 @@ internal class OrderTest {
         // given
         val products = listOf(ORDER_PRODUCT_01, ORDER_PRODUCT_02, ORDER_PRODUCT_03)
         val shippingInfo = shippingInfo
-        val orderState = OrderState.BEFORE_PAY
+        val orderState = OrderState.PAYMENT_WAITING
 
         val order = Order(products, shippingInfo, orderState)
 
@@ -78,7 +78,7 @@ internal class OrderTest {
         // given
         val products = listOf(ORDER_PRODUCT_01, ORDER_PRODUCT_02, ORDER_PRODUCT_03)
         val shippingInfo = shippingInfo
-        val orderState = OrderState.SHIPPING
+        val orderState = OrderState.DELIVERING
 
         val order = Order(products, shippingInfo, orderState)
 
